@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.dao.UserDao">
+    <!--注册-->
+    <insert id="register" parameterType="User">
+        insert into graduation_project.user(username, password, email, avatar)
+         values (#{username},#{password},#{email},#{avatar})
+    </insert>
+    <!--查询-->
+    <select id="queryAll" resultType="User">
+        select * from graduation_project.user
+        where username=#{username} or email=#{username}
+    </select>
+
+    <!--登录-->
+    <select id="login" resultType="User">
+        select * from graduation_project.user
+        where username=#{username} and password=#{password}
+    </select>
+    <!--Email登录-->
+    <select id="loginEmail" resultType="User">
+        select * from graduation_project.user
+        where email=#{username} and password=#{password}
+    </select>
+    <!--修改密码-->
+    <update id="update" parameterType="User">
+        update graduation_project.user set password=#{password}
+        where id=#{id}
+    </update>
+    <!--修改name-->
+    <update id="updateName" parameterType="User">
+        update graduation_project.user set username=#{username}
+        where id=#{id}
+    </update>
+    <!--修改头像-->
+    <update id="updateImg">
+        update graduation_project.user set avatar =#{avatar}
+        where id=#{id}
+    </update>
+    <!--查询Email-->
+    <select id="queryEmail" resultType="User">
+        select * from graduation_project.user
+        where email=#{email}
+    </select>
+</mapper>

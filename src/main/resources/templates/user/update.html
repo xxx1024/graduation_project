@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html class="no-js " lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+    <title>捐助修改</title>
+    <!-- 引入layui css -->
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">
+    <!-- 引入layui js -->
+    <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <link rel="stylesheet" th:href="@{assets/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assets/plugins/dropzone/dropzone.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" th:href="@{assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{assets/css/color_skins.css}">
+
+</head>
+<body class="theme-purple">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/logo.svg" width="48" height="48" alt="Compass"></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="col-12">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="index.html"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+            <li class="hidden-sm-down">
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="javascript:void(0);" class="fullscreen hidden-sm-down" data-provide="fullscreen" data-close="true"><i class="zmdi zmdi-fullscreen"></i></a>
+            </li>
+            <li><a th:href="@{/user/logout}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            <li class=""><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar">
+    <div class="menu">
+        <ul class="list">
+            <li>
+                <div class="user-info">
+                    <div class="image">
+                        <a th:href="@{/templates/user}"><img th:src="${session.avatar}" alt="User"></a></div>
+                    <div class="detail">
+                        <h4>欢迎您！用户</h4>
+                        <h5 style="color: green">[[${session.username}]]</h5>
+                    </div>
+                </div>
+            </li>
+            <li class="header">MAIN</li>
+            <li><a th:href="@{/main}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
+            <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
+                <img src="assets/images/biaoge.png" width="17"><span>捐助</span> </a>
+                <ul class="ml-menu">
+                    <li><a th:href="@{/show}">捐助查看</a></li>
+                    <li><a th:href="@{/add}">捐助登记</a></li>
+
+                </ul>
+            </li>
+            <li><a href="javascript:void(0);" class="menu-toggle">
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>个人中心</span> </a>
+                <ul class="ml-menu">
+                    <li><a th:href="@{/user}">我的资料</a></li>
+                    <li><a th:href="@{/user-update}">修改资料</a></li>
+                    <li><a th:href="@{/user-avatar}">上传头像</a></li>
+                </ul>
+            </li>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<!-- Right Sidebar -->
+<aside id="rightsidebar" class="right-sidebar">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active slideRight" id="setting">
+            <div class="slim_scroll">
+                <div class="card">
+                    <h6>颜色</h6>
+                    <ul class="choose-skin list-unstyled">
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                        </li>
+                        <li data-theme="cyan" class="active">
+                            <div class="cyan"></div>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                        </li>
+                        <li data-theme="blush">
+                            <div class="blush"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h6>左侧菜单栏</h6>
+                    <ul class="list-unstyled theme-light-dark">
+                        <li>
+                            <div class="t-light btn btn-default btn-simple btn-round">明亮</div>
+                        </li>
+                        <li>
+                            <div class="t-dark btn btn-default btn-round">黑暗</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+
+<!-- Main Content -->
+
+
+<section class="content home">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>登记表
+                    <small class="text-muted">请填写表单</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
+                    <i class="zmdi zmdi-plus"></i>
+                </button>
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Compass</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Property</a></li>
+                    <li class="breadcrumb-item active">登记表</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+
+                <form class="layui-form" th:action="@{/items/update}">
+                    <div class="layui-form-item">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>物品</strong><small>请选择物品类型</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <input type="hidden" name="id" th:value="${lists.id}">
+                            <div class="layui-input-block">
+                                <select name="items" lay-verify="required">
+                                    <option name="items" th:text="${lists.items}"></option>
+                                    <option name="items" value="医用口罩">医用口罩</option>
+                                    <option name="items" value="医用防护服">医用防护服</option>
+                                    <option name="items" value="一次性医用手套">一次性医用手套</option>
+                                    <option name="items" value="其他">其他</option>
+                                </select>
+                            </div>
+                            <br><br><br>
+                        </div>
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>数量</strong><small>请输入物品数量</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <div class="layui-input-block">
+                                <input th:value="${lists.number}" type="text" name="number" required lay-verify="required" autocomplete="off" class="layui-input">
+                            </div><br><br><br>
+                        </div>
+
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>快递单号</strong><small>请输入快递单号</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <div class="layui-input-block">
+                                <input th:value="${lists.ems_number}" type="text" name="ems_number" required lay-verify="required" autocomplete="off" class="layui-input">
+                            </div><br><br><br>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-round">立即提交</button>
+                    </div>
+                </form>
+                <script>
+                    //Demo
+                    layui.use('form', function(){
+                        var form = layui.form;
+                        //监听提交
+                        form.on('submit(formDemo)', function(data){
+                            layer.msg(JSON.stringify(data.field));
+                            return false;
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js -->
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+
+<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="assets/plugins/dropzone/dropzone.js"></script> <!-- Dropzone Plugin Js -->
+
+<script src="assets/bundles/mainscripts.bundle.js"></script>
+</body>
+</html>
