@@ -114,7 +114,9 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         //封装登录用户的用户名和密码做成UsernameToken,拿到令牌
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
-        //执行登录方法，经过一系列跳转，然后到UserRealm类的doGetAuthenticationInfo()方法，用户名和密码做认证，如果没有异常就认证成功跳转页面，有异常的话，走shiro底层quickStart的异常登录
+        //执行登录方法，经过一系列跳转，然后到UserRealm类的doGetAuthenticationInfo()方法，
+        // 用户名和密码做认证，如果没有异常就认证成功跳转页面，有异常的话，
+        // 走shiro底层quickStart的异常登录
         try {
             subject.login(usernamePasswordToken);
             User user = userService.queryAll(username);
