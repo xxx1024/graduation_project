@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -102,6 +103,7 @@ public class RegisterController {
         PageHelper.startPage(pageNum,pageSize);
         //2.紧跟的查询就是一个分页查询-必须紧跟.后面的其他查询不会被分页，除非再次调用PageHelper.startPage
         try {
+
             Integer userid = Integer.valueOf(session.getAttribute("userid").toString());
             System.out.println("用户id："+userid);
             List<Register> lists = registerService.queryName(userid,items);
@@ -110,6 +112,7 @@ public class RegisterController {
             PageInfo<Register> pageInfo = new PageInfo<Register>(lists,pageSize);
             //4.使用model/map/modelandview等带回前端
             model.addAttribute("pageInfo",pageInfo);
+            model.addAttribute("items",items);
         }finally {
             PageHelper.clearPage(); //清理 ThreadLocal 存储的分页参数,保证线程安全
         }

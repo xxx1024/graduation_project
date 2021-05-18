@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-    <title>捐助修改</title>
+    <title>用户修改</title>
     <!-- 引入layui css -->
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">
     <!-- 引入layui js -->
@@ -34,7 +34,7 @@
     <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" th:href="@{/main}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
+            <a class="navbar-brand" th:href="@{/admin-index}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
@@ -57,30 +57,27 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image">
-                        <a th:href="@{/templates/user}"><img th:src="${session.avatar}" alt="User"></a></div>
                     <div class="detail">
-                        <h4>欢迎您！用户</h4>
+                        <h4>欢迎您！管理员</h4>
                         <h5 style="color: orangered">[[${session.username}]]</h5>
                     </div>
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li><a th:href="@{/main}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
+            <li><a th:href="@{/admin-index}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
             <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/biaoge.png" width="17"><span>捐助</span> </a>
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>用户管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/show}">捐助查看</a></li>
-                    <li><a th:href="@{/add}">捐助登记</a></li>
+                    <li><a th:href="@{/user-show}">用户列表</a></li>
+                    <li><a th:href="@{/items-show}">登记列表</a></li>
 
                 </ul>
             </li>
             <li><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/gerenzhongxin.png" width="17"><span>个人中心</span> </a>
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>管理员管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/user}">我的资料</a></li>
-                    <li><a th:href="@{/user-update}">修改资料</a></li>
-                    <li><a th:href="@{/user-avatar}">上传头像</a></li>
+                    <li><a th:href="@{/admin-show}">管理员列表</a></li>
+                    <li><a th:href="@{/admin-add}">新增管理员</a></li>
                 </ul>
             </li>
             </li>
@@ -148,9 +145,9 @@
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a th:href="@{/main}"><i class="zmdi zmdi-home"></i>首页</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">捐助</a></li>
-                    <li class="breadcrumb-item active">登记表</li>
+                    <li class="breadcrumb-item"><a th:href="@{/admin-index}"><i class="zmdi zmdi-home"></i>首页</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">用户管理</a></li>
+                    <li class="breadcrumb-item active">修改登记表</li>
                 </ul>
             </div>
         </div>
@@ -159,7 +156,7 @@
         <div class="row clearfix">
             <div class="col-lg-12">
 
-                <form class="layui-form" th:action="@{/items/update}">
+                <form class="layui-form" th:action="@{/admin/items-update}">
                     <div class="layui-form-item">
                         <div class="card">
                             <div class="header">
@@ -187,7 +184,7 @@
                                 <ul class="header-dropdown m-r--5">
                                 </ul>
                             </div>
-                            <input type="hidden" name="id" th:value="${lists.id}">
+
                             <div class="layui-input-block">
                                 <select name="items" lay-verify="required">
                                     <option name="items" th:text="${lists.items}"></option>
@@ -219,7 +216,7 @@
                                 <input th:value="${lists.ems_number}" type="text" name="ems_number" required lay-verify="required" autocomplete="off" class="layui-input">
                             </div><br>
                         </div>
-
+                        <input type="hidden" name="id" th:value="${lists.id}">
                     </div>
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary btn-round">立即提交</button>

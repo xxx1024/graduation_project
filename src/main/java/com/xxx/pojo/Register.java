@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,18 +13,12 @@ import java.util.Date;
 @ToString
 public class Register {
     private int id;
-
+    private String name;
+    private String phone;
     private String items;
     private int number;
     private String ems_number;
     private Date create_time;
     private Date update_time;
     private int uid;
-
-    public Register(String items, int number, String ems_number, int uid) {
-        this.items = items;
-        this.number = number;
-        this.ems_number = ems_number;
-        this.uid = uid;
-    }
 }

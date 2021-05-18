@@ -1,22 +1,22 @@
 ﻿<!DOCTYPE html>
 <html class="no-js " lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-
-<title>上传头像</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+    <title>管理员修改</title>
     <!-- 引入layui css -->
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">
     <!-- 引入layui js -->
     <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>
-<!-- Favicon-->
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-<!-- Custom Css -->
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/color_skins.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <link rel="stylesheet" th:href="@{assets/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assets/plugins/dropzone/dropzone.css}">
+    <!-- Custom Css -->
+    <link rel="stylesheet" th:href="@{assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{assets/css/color_skins.css}">
+
 </head>
 <body class="theme-purple">
 <!-- Page Loader -->
@@ -26,7 +26,6 @@
         <p>Please wait...</p>
     </div>
 </div>
-
 <!-- Overlay For Sidebars -->
 <div class="overlay"></div>
 
@@ -35,9 +34,7 @@
     <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" th:href="@{/main}">
-                <img src="assets/images/logo.svg" width="30" alt="首页">
-                <span class="m-l-10">首页</span></a>
+            <a class="navbar-brand" th:href="@{/admin-index}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
@@ -60,34 +57,30 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image">
-                        <a th:href="@{/user}"><img th:src="${session.avatar}" alt="User"></a></div>
                     <div class="detail">
-                        <h4>欢迎您！用户</h4>
+                        <h4>欢迎您！管理员</h4>
                         <h5 style="color: orangered">[[${session.username}]]</h5>
                     </div>
                 </div>
             </li>
             <li class="header">MAIN</li>
-
-            <li><a th:href="@{/main}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
-
+            <li><a th:href="@{/admin-index}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
             <li><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/biaoge.png" width="17"><span>捐助</span> </a>
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>用户管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/show}">捐助查看</a></li>
-                    <li><a th:href="@{/add}">捐助登记</a></li>
+                    <li><a th:href="@{/user-show}">用户列表</a></li>
+                    <li><a th:href="@{/items-show}">登记列表</a></li>
+
                 </ul>
             </li>
             <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/gerenzhongxin.png" width="17"><span>个人中心</span> </a>
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>管理员管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/user}">我的资料</a></li>
-                    <li><a th:href="@{/user-update}">修改资料</a></li>
-                    <li><a th:href="@{/user-avatar}">上传头像</a></li>
+                    <li><a th:href="@{/admin-show}">管理员列表</a></li>
+                    <li><a th:href="@{/admin-add}">新增管理员</a></li>
                 </ul>
             </li>
-            
+            </li>
         </ul>
     </div>
 </aside>
@@ -138,48 +131,78 @@
         </div>
     </div>
 </aside>
-
-
 <!-- Main Content -->
-<section class="content">
+<section class="content home">
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>上传头像
-                <small class="text-muted">欢迎上传头像</small>
+                <h2>新增管理员信息
+                    <small class="text-muted">新增管理员信息</small>
                 </h2>
             </div>
-            <div class="col-lg-5 col-md-6 col-sm-12">                
+            <div class="col-lg-5 col-md-6 col-sm-12">
                 <button class="btn btn-primary btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a th:href="@{/main}"><i class="zmdi zmdi-home"></i> 首页</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">个人中心</a></li>
-                    <li class="breadcrumb-item active">上传头像</li>
-                </ul>                
+                    <li class="breadcrumb-item"><a th:href="@{/admin-index}"><i class="zmdi zmdi-home"></i>首页</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">管理员管理</a></li>
+                    <li class="breadcrumb-item active">新增管理员信息</li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <!--修改头像-->
-    <div class="avatar">
-        <form method="post" name="file" th:action="@{/user/avatar}" enctype="multipart/form-data">
-            <p class="modify">
-                <input type="file" class="file" id="file" name="file">
-            </p>
-            <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary btn-round">立即上传</button>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <form class="layui-form" th:action="@{/admin/admin-add}">
+                    <div class="layui-form-item">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>用户名</strong><small>请输入用户名</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <div class="layui-input-block">
+                                <input type="text" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
+                            </div><br>
+                        </div>
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>密码</strong><small>请输入密码</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <div class="layui-input-block">
+                                <input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                            </div><br>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-round">立即提交</button>
+                    </div>
+                </form>
             </div>
-            <span style="color: red" th:text="${error}"></span>
-            <span style="color: green" th:text="${success}"></span>
-        </form>
+        </div>
     </div>
-
 </section>
-<!-- Jquery Core Js --> 
-<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<!-- Jquery Core Js -->
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+
+<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="assets/plugins/dropzone/dropzone.js"></script> <!-- Dropzone Plugin Js -->
 
 <script src="assets/bundles/mainscripts.bundle.js"></script>
 </body>

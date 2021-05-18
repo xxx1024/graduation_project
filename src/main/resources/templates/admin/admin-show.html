@@ -28,7 +28,7 @@
     <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" th:href="@{/main}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
+            <a class="navbar-brand" th:href="@{/admin-index}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
@@ -51,30 +51,27 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image">
-                        <a th:href="@{/user}"><img th:src="${session.avatar}" alt="User"></a></div>
                     <div class="detail">
-                        <h4>欢迎您！用户</h4>
+                        <h4>欢迎您！管理员</h4>
                         <h5 style="color: orangered">[[${session.username}]]</h5>
                     </div>
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li><a th:href="@{/main}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
-            <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/biaoge.png" width="17"><span>捐助</span> </a>
+            <li><a th:href="@{/admin-index}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
+            <li><a href="javascript:void(0);" class="menu-toggle">
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>用户管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/show}">捐助查看</a></li>
-                    <li><a th:href="@{/add}">捐助登记</a></li>
+                    <li><a th:href="@{/admin-user-show}">用户列表</a></li>
+                    <li><a th:href="@{/admin-items-show}">登记列表</a></li>
 
                 </ul>
             </li>
-            <li><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/gerenzhongxin.png" width="17"><span>个人中心</span> </a>
+            <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>管理员管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/user}">我的资料</a></li>
-                    <li><a th:href="@{/user-update}">修改资料</a></li>
-                    <li><a th:href="@{/user-avatar}">上传头像</a></li>
+                    <li><a th:href="@{/admin-show}">管理员列表</a></li>
+                    <li><a th:href="@{/admin-add}">新增管理员</a></li>
                 </ul>
             </li>
             </li>
@@ -134,8 +131,8 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>记录查看
-                <small class="text-muted">欢迎查看记录</small>
+                <h2>管理员列表查看
+                <small class="text-muted">欢迎查看用户列表</small>
                 </h2>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
@@ -143,15 +140,15 @@
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a th:href="@{/main}"><i class="zmdi zmdi-home"></i> 首页</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">捐助</a></li>
-                    <li class="breadcrumb-item active">捐助查看</li>
+                    <li class="breadcrumb-item"><a th:href="@{/admin-index}"><i class="zmdi zmdi-home"></i> 首页</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">管理员管理</a></li>
+                    <li class="breadcrumb-item active">管理员列表查看</li>
                 </ul>
             </div>
             <!--搜索框-->
-            <form class="form-search" method="post" th:action="@{/search}">
+            <form class="form-search" method="post" th:action="@{/searchAdmin}">
                 <div class="input-group">
-                    <input type="text" name="items" class="form-control" placeholder="输入物品名称查询">
+                    <input type="text" name="username" class="form-control" placeholder="输入用户名查询">
                     <span class="input-group-addon">
                          <i class="zmdi zmdi-search"></i>
                     </span>
@@ -164,36 +161,28 @@
                     <div class="table-responsive">
                         <table id="mainTable" class="table table-striped" style="cursor: pointer;">
                             <thead>
-                            <tr><th>姓名</th>
-                                <th>手机号</th>
-                                <th>物品</th>
-                                <th>数量</th>
-                                <th>快递单号</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
+                            <tr><th>#id</th>
+                                <th>用户名</th>
+                                <th>密码</th>
                                 <th>操作</th>
                             </tr></thead>
                             <tbody>
                             <tr th:each="list:${pageInfo.list}">
-                                <td th:text="${list.name}"></td>
-                                <td th:text="${list.phone}"></td>
-                                <td th:text="${list.items}"></td>
-                                <td th:text="${list.number}"></td>
-                                <td th:text="${list.ems_number}"></td>
-                                <td th:text="${#dates.format(list.create_time,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                <td th:text="${#dates.format(list.update_time,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                <td>
-                                    <a class="btn btn-primary btn-round" th:href="@{/query(id=${list.id})}">编辑</a>
-                                    <a class="btn btn-danger btn-round" th:href="@{/items/delete(id=${list.id})}">删除</a>
+                                <td th:text="${list.id}"></td>
+                                <td th:text="${list.username}"></td>
+                                <td th:text="${list.password}"></td>
+                               <td>
+                                    <a class="btn btn-primary btn-round" th:href="@{/admin-queryAdminId(id=${list.id})}">编辑</a>
+                                    <a class="btn btn-danger btn-round" th:href="@{/admin/admin-delete(id=${list.id})}">删除</a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                         <p>当前 <span style="color: blue" th:text="${pageInfo.pageNum}"></span> 页,总 <span style="color: blue" th:text="${pageInfo.pages}"></span> 页,共 <span style="color: red" th:text="${pageInfo.total}"></span> 条记录</p>
-                        <a th:href="@{/search(items=${items})}">首页</a>
-                        <a th:href="@{/search(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1,items=${items})}">上一页</a>
-                        <a th:href="@{/search(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages},items=${items})}">下一页</a>
-                        <a th:href="@{/search(pageNum=${pageInfo.pages},items=${items})}">尾页</a>
+                        <a th:href="@{/searchAdmin(username=${username})}">首页</a>
+                        <a th:href="@{/searchAdmin(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1,username=${username})}">上一页</a>
+                        <a th:href="@{/searchAdmin(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages},username=${username})}">下一页</a>
+                        <a th:href="@{/searchAdmin(pageNum=${pageInfo.pages},username=${username})}">尾页</a>
                       </div>
                 </div>
             </div>

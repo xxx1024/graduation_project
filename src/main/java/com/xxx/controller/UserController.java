@@ -133,23 +133,6 @@ public class UserController {
             ra1.addFlashAttribute("msg","用户名错误");//密码不存在，还是返回Login页
             return "redirect:/login";
         }
-
-        /*User login = userService.login(username, password);
-        User user1 = userService.loginEmail(username, password);
-        if (login!=null||user1!=null){
-            //System.out.println("session存入:"+username);
-            User user = userService.queryAll(username);
-            //System.out.println("用户id："+user.getId());
-            //存入name、id、email
-            session.setAttribute("username",user.getUsername());
-            session.setAttribute("userid",user.getId());
-            session.setAttribute("useremail",user.getEmail());
-            session.setAttribute("avatar",user.getAvatar());
-            return "redirect:/main";
-        }else {
-            ra1.addFlashAttribute("msg","用户名或密码错误");
-            return "redirect:/login";
-        }*/
     }
     //注销
     @RequestMapping("/user/logout")

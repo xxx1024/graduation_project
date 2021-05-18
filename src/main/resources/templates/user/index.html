@@ -30,7 +30,7 @@
     <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="index.html"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
+            <a class="navbar-brand" th:href="@{/main}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
@@ -62,7 +62,8 @@
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li class="active open"><a th:href="@{/main}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
+            <li class="active open"><a th:href="@{/main}">
+                <img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
             <li><a href="javascript:void(0);" class="menu-toggle">
                 <img src="assets/images/biaoge.png" width="17"><span>捐助</span> </a>
                 <ul class="ml-menu">
@@ -130,6 +131,15 @@
         </div>
     </div>
 </aside>
+<section class="content home">
+    <select name="items">
+        <option>请选择物品类型</option>
+        <option name="items" value="医用口罩">医用口罩</option>
+        <option name="items" value="医用防护服">医用防护服</option>
+        <option name="items" value="一次性医用手套">一次性医用手套</option>
+        <option name="items" value="其他">其他</option>
+    </select>
+</section>
 
 
 <!-- Jquery Core Js --> 

@@ -36,7 +36,7 @@
     <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="index.html"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
+            <a class="navbar-brand" th:href="@{/main}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
@@ -153,7 +153,7 @@
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> 首页</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/main}"><i class="zmdi zmdi-home"></i> 首页</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0);">个人中心</a></li>
                     <li class="breadcrumb-item active">修改资料</li>
                 </ul>                

@@ -1,13 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js " lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-<title>表单查看</title>
+<title>主页</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
 <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css">
+<link rel="stylesheet" href="assets/plugins/morrisjs/morris.min.css">
 <!-- Custom Css -->
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/color_skins.css">
@@ -28,7 +30,7 @@
     <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" th:href="@{/main}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
+            <a class="navbar-brand" th:href="@{/admin-index}"><img src="assets/images/logo.svg" width="30" alt="首页"><span class="m-l-10">首页</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
@@ -51,30 +53,27 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image">
-                        <a th:href="@{/user}"><img th:src="${session.avatar}" alt="User"></a></div>
                     <div class="detail">
-                        <h4>欢迎您！用户</h4>
+                        <h4>欢迎您！管理员</h4>
                         <h5 style="color: orangered">[[${session.username}]]</h5>
                     </div>
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li><a th:href="@{/main}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
-            <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/biaoge.png" width="17"><span>捐助</span> </a>
+            <li class="active open"><a th:href="@{/admin-index}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
+            <li><a href="javascript:void(0);" class="menu-toggle">
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>用户管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/show}">捐助查看</a></li>
-                    <li><a th:href="@{/add}">捐助登记</a></li>
+                    <li><a th:href="@{/admin-user-show}">用户列表</a></li>
+                    <li><a th:href="@{/admin-items-show}">登记列表</a></li>
 
                 </ul>
             </li>
             <li><a href="javascript:void(0);" class="menu-toggle">
-                <img src="assets/images/gerenzhongxin.png" width="17"><span>个人中心</span> </a>
+                <img src="assets/images/gerenzhongxin.png" width="17"><span>管理员管理</span> </a>
                 <ul class="ml-menu">
-                    <li><a th:href="@{/user}">我的资料</a></li>
-                    <li><a th:href="@{/user-update}">修改资料</a></li>
-                    <li><a th:href="@{/user-avatar}">上传头像</a></li>
+                    <li><a th:href="@{/admin-show}">管理员列表</a></li>
+                    <li><a th:href="@{/admin-add}">新增管理员</a></li>
                 </ul>
             </li>
             </li>
@@ -129,13 +128,12 @@
     </div>
 </aside>
 
-<!-- Main Content -->
 <section class="content home">
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>记录查看
-                <small class="text-muted">欢迎查看记录</small>
+                <h2>捐助物资种类及数量查看
+                    <small class="text-muted">欢迎查看物资种类及数量</small>
                 </h2>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
@@ -143,67 +141,55 @@
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a th:href="@{/main}"><i class="zmdi zmdi-home"></i> 首页</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">捐助</a></li>
-                    <li class="breadcrumb-item active">捐助查看</li>
+                    <li class="breadcrumb-item"><a th:href="@{/admin-index}"><i class="zmdi zmdi-home"></i> 首页</a></li>
                 </ul>
             </div>
-            <!--搜索框-->
-            <form class="form-search" method="post" th:action="@{/search}">
-                <div class="input-group">
-                    <input type="text" name="items" class="form-control" placeholder="输入物品名称查询">
-                    <span class="input-group-addon">
-                         <i class="zmdi zmdi-search"></i>
-                    </span>
-                    <button class="btn btn-primary btn-round" type="submit">查找</button>
-                </div>
-              </form>
-
+            <br><br><br><br>
             <div class="input-group">
-                <div class="input-group">
-                    <div class="table-responsive">
-                        <table id="mainTable" class="table table-striped" style="cursor: pointer;">
-                            <thead>
-                            <tr><th>姓名</th>
-                                <th>手机号</th>
-                                <th>物品</th>
-                                <th>数量</th>
-                                <th>快递单号</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
-                                <th>操作</th>
-                            </tr></thead>
-                            <tbody>
-                            <tr th:each="list:${pageInfo.list}">
-                                <td th:text="${list.name}"></td>
-                                <td th:text="${list.phone}"></td>
-                                <td th:text="${list.items}"></td>
-                                <td th:text="${list.number}"></td>
-                                <td th:text="${list.ems_number}"></td>
-                                <td th:text="${#dates.format(list.create_time,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                <td th:text="${#dates.format(list.update_time,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                <td>
-                                    <a class="btn btn-primary btn-round" th:href="@{/query(id=${list.id})}">编辑</a>
-                                    <a class="btn btn-danger btn-round" th:href="@{/items/delete(id=${list.id})}">删除</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <p>当前 <span style="color: blue" th:text="${pageInfo.pageNum}"></span> 页,总 <span style="color: blue" th:text="${pageInfo.pages}"></span> 页,共 <span style="color: red" th:text="${pageInfo.total}"></span> 条记录</p>
-                        <a th:href="@{/search(items=${items})}">首页</a>
-                        <a th:href="@{/search(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1,items=${items})}">上一页</a>
-                        <a th:href="@{/search(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages},items=${items})}">下一页</a>
-                        <a th:href="@{/search(pageNum=${pageInfo.pages},items=${items})}">尾页</a>
-                      </div>
+                <div class="table-responsive">
+                    <table id="mainTable" class="table table-striped" style="cursor: pointer;">
+                        <thead>
+                        <tr>
+                            <th>物品类型</th>
+                            <th>物品数量</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr>
+                            <td>医用口罩</td>
+                            <td th:text="${number1}"></td>
+                        </tr>
+                        <tr>
+                            <td>医用防护服</td>
+                            <td th:text="${number2}"></td>
+                        </tr>
+                        <tr>
+                            <td>一次性医用手套</td>
+                            <td th:text="${number3}"></td>
+                        </tr>
+                        <tr>
+                            <td>其他</td>
+                            <td th:text="${number4}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
+
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) --> 
 <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
 
+<script src="assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+<script src="assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
+<script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
+<script src="assets/bundles/countTo.bundle.js"></script> <!-- Jquery CountTo Plugin Js -->
+<script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
+
 <script src="assets/bundles/mainscripts.bundle.js"></script>
+<script src="assets/js/pages/index.js"></script>
 </body>
 </html>

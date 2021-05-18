@@ -23,7 +23,12 @@ class GraduationProjectApplicationTests {
     }
     @Test
     public void test1() throws Exception {
-
+        String emailServiceCode = String.valueOf(System.currentTimeMillis()).substring(7);
+        System.out.println(emailServiceCode);
+        System.out.println(emailServiceCode);
+        System.out.println(emailServiceCode);
+//1621328470806 645415
+//1621328470806
 //获取文件的相对路径  可在控制台打印查看输出结果
 //        String path1 =System.getProperty("user.dir")+"\\src\\main\\resources\\static\\upload";
 //        System.out.println( path1);
@@ -32,8 +37,8 @@ class GraduationProjectApplicationTests {
 //                getContextClassLoader().getResource("static").
 //                getPath()+"/upload";
 //        System.out.println("保存路径:"+path);
-        String emailServiceCode = UUID.randomUUID().toString().substring(0, 6);
-        System.out.println(emailServiceCode);
+//        String emailServiceCode = UUID.randomUUID().toString().substring(0, 6);
+//        System.out.println(emailServiceCode);
     }
 
 }

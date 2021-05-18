@@ -4,7 +4,98 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxx.dao.AdminDao">
     <!--登录-->
-    <select id="login" resultType="com.xxx.pojo.Admin">
-        select id,username, password from graduation_project.admin where username=#{username} and password=#{password}
+    <select id="login" resultType="Admin">
+        select * from graduation_project.admin where
+        username=#{username} and password=#{password}
     </select>
+    <!--用户-->
+    <!--查询用户-->
+    <select id="queryAllUser" resultType="User">
+        select * from user
+    </select>
+    <!--ById查询用户-->
+    <select id="queryByUserId" resultType="User" parameterType="_int">
+        select * from user
+        where id=#{id}
+    </select>
+    <!--修改用户-->
+    <update id="updateUser" parameterType="User">
+        update user set
+        username=#{username},password=#{password},email=#{email}
+        where id=#{id}
+    </update>
+    <!--删除用户-->
+    <delete id="deleteUser" parameterType="_int">
+        delete from user where id=#{id}
+    </delete>
+
+    <!--表单-->
+    <!--查询表单-->
+    <select id="queryAllItems" resultType="Register">
+        SELECT * FROM register
+    </select>
+    <!--ById查询表单-->
+    <select id="queryByItemsId" resultType="Register" parameterType="_int">
+        select * from register
+        where id=#{id}
+    </select>
+    <!--修改表单-->
+    <update id="updateItems" parameterType="Register">
+        update register set
+        name=#{name},phone=#{phone},items=#{items},
+        ems_number=#{ems_number}
+        where id=#{id}
+    </update>
+    <!--删除表单-->
+    <delete id="deleteItems" parameterType="_int">
+        delete from register where id=#{id}
+    </delete>
+
+
+    <!--admin-->
+    <!--查询admin-->
+    <select id="queryAllAdmin" resultType="Admin">
+        select * from admin
+    </select>
+    <!--ById查询admin-->
+    <select id="queryByAdminId" resultType="Admin" parameterType="_int">
+        select * from admin
+        where id=#{id}
+    </select>
+    <!--修改admin-->
+    <update id="updateAdmin" parameterType="Admin">
+        update admin set
+        username=#{username},password=#{password}
+        where id=#{id}
+    </update>
+    <!--删除admin-->
+    <delete id="deleteAdmin" parameterType="_int">
+        delete from admin where id=#{id}
+    </delete>
+    <!--增加admin-->
+    <insert id="add" parameterType="Admin">
+        insert into admin(username, password) values (#{username},#{password})
+    </insert>
+    <!--统计物品数量-->
+    <select id="ItemsNum" resultType="int">
+        SELECT SUM(number) FROM register WHERE items =#{items}
+    </select>
+
+    <!--用户搜索-->
+    <select id="searchUser" resultType="User">
+        select * from user
+        where user.username like concat('%',#{username},'%')
+    </select>
+    <!--物品搜索-->
+    <select id="searchItems" resultType="Register">
+        select * from register
+        where register.items like concat('%',#{items},'%')
+    </select>
+    <!--管理员搜索-->
+    <select id="searchAdmin" resultType="Admin">
+        select * from admin
+        where admin.username like concat('%',#{username},'%')
+    </select>
+
+
 </mapper>

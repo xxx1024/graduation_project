@@ -23,6 +23,13 @@ public class MyConfig implements WebMvcConfigurer {
         registry.addViewController("/user-avatar").setViewName("user/avatar");
         registry.addViewController("/forget").setViewName("forget");
         registry.addViewController("/pwd-update").setViewName("pwd-update");
+        registry.addViewController("/admin-login").setViewName("admin/login");
+        registry.addViewController("/admin-index").setViewName("admin/index");
+        registry.addViewController("/admin-user-show").setViewName("admin/user-show");
+        registry.addViewController("/admin-items-show").setViewName("admin/items-show");
+        registry.addViewController("/admin-show").setViewName("admin/admin-show");
+        registry.addViewController("/admin-add").setViewName("admin/admin-add");
+
 
     }
 

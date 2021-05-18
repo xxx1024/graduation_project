@@ -19,41 +19,9 @@
 <body class="theme-purple authentication sidebar-collapse">
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
-    <div class="container">        
-        <div class="navbar-translate n_logo">
-            <a class="navbar-brand" href="#" title="" target="_blank">COMPASS</a>
-            <button class="navbar-toggler" type="button">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-            </button>
-        </div>
+    <div class="container">
         <div class="navbar-collapse">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="user/index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Search Result</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" title="Follow us on Twitter" href="#" target="_blank">
-                        <i class="zmdi zmdi-twitter"></i>
-                        <p class="d-lg-none d-xl-none">Twitter</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" title="Like us on Facebook" href="#" target="_blank">
-                        <i class="zmdi zmdi-facebook"></i>
-                        <p class="d-lg-none d-xl-none">Facebook</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" title="Follow us on Instagram" href="#" target="_blank">                        
-                        <i class="zmdi zmdi-instagram"></i>
-                        <p class="d-lg-none d-xl-none">Instagram</p>
-                    </a>
-                </li>                
                 <li class="nav-item">
                     <a class="nav-link btn btn-primary btn-round" th:href="@{/register}" th:text="#{login.sign_up}">SIGN UP</a>
                 </li>
@@ -101,21 +69,14 @@
             </div>
         </div>
     </div>
-   <footer class="footer">
+    <footer class="footer">
         <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="http://thememakker.com/contact/" target="_blank">Contact Us</a></li>
-                    <li><a href="http://thememakker.com/about/" target="_blank">About Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </nav>
             <div class="copyright">
                 ©
                 <script>
                     document.write(new Date().getFullYear())
                 </script>,
-                <span>Designed by <a href="http://thememakker.com/" target="_blank">ThemeMAkker</a></span>
+                <span>Designed by <span style="color: #ff8c1f">谢晓伟</span></span>
             </div>
         </div>
     </footer>
