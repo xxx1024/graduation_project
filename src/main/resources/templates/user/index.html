@@ -132,13 +132,55 @@
     </div>
 </aside>
 <section class="content home">
-    <select name="items">
-        <option>请选择物品类型</option>
-        <option name="items" value="医用口罩">医用口罩</option>
-        <option name="items" value="医用防护服">医用防护服</option>
-        <option name="items" value="一次性医用手套">一次性医用手套</option>
-        <option name="items" value="其他">其他</option>
-    </select>
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>已捐助物资数量统计
+                    <small class="text-muted">欢迎查看已捐助物资</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon btn-round hidden-sm-down float-right m-l-10" type="button">
+                    <i class="zmdi zmdi-plus"></i>
+                </button>
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a th:href="@{/main}"><i class="zmdi zmdi-home"></i> 首页</a></li>
+                </ul>
+            </div>
+            <br><br><br><br>
+            <div class="input-group">
+                <div class="table-responsive">
+                    <table id="mainTable" class="table table-striped" style="cursor: pointer;">
+                        <thead>
+                        <tr>
+                            <th>物品类型</th>
+                            <th>物品数量</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr>
+                            <td>医用口罩</td>
+                            <td th:text="${number1}"></td>
+                        </tr>
+                        <tr>
+                            <td>医用防护服</td>
+                            <td th:text="${number2}"></td>
+                        </tr>
+                        <tr>
+                            <td>一次性医用手套</td>
+                            <td th:text="${number3}"></td>
+                        </tr>
+                        <tr>
+                            <td>其他</td>
+                            <td th:text="${number4}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
 </section>
 
 

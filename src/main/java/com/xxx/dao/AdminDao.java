@@ -52,4 +52,6 @@ public interface AdminDao {
     List<Register> searchItems(String items);
     //搜索管理员
     List<Admin> searchAdmin(String username);
+    //判断管理员用户名是否已经存在
+    Admin queryByName(String username);
 }

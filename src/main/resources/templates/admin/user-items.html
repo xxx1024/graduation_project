@@ -39,7 +39,7 @@
             <li>
                 <a href="javascript:void(0);" class="fullscreen hidden-sm-down" data-provide="fullscreen" data-close="true"><i class="zmdi zmdi-fullscreen"></i></a>
             </li>
-            <li><a th:href="@{/user/logout}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            <li><a th:href="@{/admin/logout}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
             <li class=""><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
         </ul>
     </div>
@@ -146,7 +146,7 @@
                 </ul>
             </div>
             <!--搜索框-->
-            <form class="form-search" method="post" th:action="@{/search}">
+            <form class="form-search" method="post" th:action="@{/searchUserItems}">
                 <div class="input-group">
                     <input type="text" name="items" class="form-control" placeholder="输入物品名称查询">
                     <span class="input-group-addon">
@@ -180,17 +180,17 @@
                                 <td th:text="${#dates.format(list.create_time,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${#dates.format(list.update_time,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td>
-                                    <a class="btn btn-primary btn-round" th:href="@{/admin-queryItemsId(id=${list.id})}">编辑</a>
+                                    <a class="btn btn-primary btn-round" th:href="@{/admin-queryUserItemsId(id=${list.id})}">编辑</a>
                                     <a class="btn btn-danger btn-round" th:href="@{/admin/items-delete(id=${list.id})}">删除</a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                         <p>当前 <span style="color: blue" th:text="${pageInfo.pageNum}"></span> 页,总 <span style="color: blue" th:text="${pageInfo.pages}"></span> 页,共 <span style="color: red" th:text="${pageInfo.total}"></span> 条记录</p>
-                        <a th:href="@{/admin-user-items(id=${id})}">首页</a>
-                        <a th:href="@{/admin-user-items(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1,id=${id})}">上一页</a>
-                        <a th:href="@{/admin-user-items(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages},id=${id})}">下一页</a>
-                        <a th:href="@{/admin-user-items(pageNum=${pageInfo.pages},id=${id})}">尾页</a>
+                        <a th:href="@{/searchUserItems(id=${id},items=${items})}">首页</a>
+                        <a th:href="@{/searchUserItems(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1,id=${id},items=${items})}">上一页</a>
+                        <a th:href="@{/searchUserItems(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages},id=${id},items=${items})}">下一页</a>
+                        <a th:href="@{/searchUserItems(pageNum=${pageInfo.pages},id=${id},items=${items})}">尾页</a>
                       </div>
                 </div>
             </div>

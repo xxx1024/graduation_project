@@ -97,17 +97,13 @@ public class RegisterController {
         if(pageSize == null){
             pageSize = 5;    //设置默认每页显示的数据数
         }
-        System.out.println("当前页是："+pageNum+"显示条数是："+pageSize);
-
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
         PageHelper.startPage(pageNum,pageSize);
         //2.紧跟的查询就是一个分页查询-必须紧跟.后面的其他查询不会被分页，除非再次调用PageHelper.startPage
         try {
-
             Integer userid = Integer.valueOf(session.getAttribute("userid").toString());
-            System.out.println("用户id："+userid);
+
             List<Register> lists = registerService.queryName(userid,items);
-            System.out.println("分页数据："+lists);
             //3.使用PageInfo包装查询后的结果,5是连续显示的条数,结果list类型是Page<E>
             PageInfo<Register> pageInfo = new PageInfo<Register>(lists,pageSize);
             //4.使用model/map/modelandview等带回前端

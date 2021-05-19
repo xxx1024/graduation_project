@@ -1,5 +1,6 @@
 package com.xxx.controller;
 
+import com.xxx.pojo.Admin;
 import com.xxx.pojo.User;
 import com.xxx.service.UserService;
 
@@ -8,6 +9,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,6 +17,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -110,10 +114,10 @@ public class UserController {
     @RequestMapping("/user/login")
     public String login(String username, String password, RedirectAttributes ra1,
                         HttpSession session){
-
+        String encode = MD5Encoder.encode(DigestUtils.md5Digest(password.getBytes()));
         Subject subject = SecurityUtils.getSubject();
         //封装登录用户的用户名和密码做成UsernameToken,拿到令牌
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,encode);
         //执行登录方法，经过一系列跳转，然后到UserRealm类的doGetAuthenticationInfo()方法，
         // 用户名和密码做认证，如果没有异常就认证成功跳转页面，有异常的话，
         // 走shiro底层quickStart的异常登录
@@ -136,8 +140,7 @@ public class UserController {
     }
     //注销
     @RequestMapping("/user/logout")
-    public String logout(HttpSession session){
-//        session.invalidate();
+    public String logout(){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
         return "redirect:/login";
@@ -258,5 +261,23 @@ public class UserController {
         ra.addFlashAttribute("success","上传头像成功");
         // 响应成功与头像路径
         return "redirect:/user-avatar";
+    }
+    //统计物品数量
+    @RequestMapping("/main")
+    public String ItemsNum(Model model,HttpSession session){
+        String item1 ="医用口罩";
+        String item2 ="医用防护服";
+        String item3 ="一次性医用手套";
+        String item4 ="其他";
+        Integer id = (Integer) session.getAttribute("userid");
+        int number1 = userService.ItemsNum(item1,id);
+        int number2 = userService.ItemsNum(item2,id);
+        int number3 = userService.ItemsNum(item3,id);
+        int number4 = userService.ItemsNum(item4,id);
+        model.addAttribute("number1",number1);
+        model.addAttribute("number2",number2);
+        model.addAttribute("number3",number3);
+        model.addAttribute("number4",number4);
+        return "user/index";
     }
 }

@@ -45,7 +45,7 @@
             <li>
                 <a href="javascript:void(0);" class="fullscreen hidden-sm-down" data-provide="fullscreen" data-close="true"><i class="zmdi zmdi-fullscreen"></i></a>
             </li>
-            <li><a th:href="@{/user/logout}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            <li><a th:href="@{/admin/logout}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
             <li class=""><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
         </ul>
     </div>
@@ -181,6 +181,7 @@
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary btn-round">立即提交</button>
                     </div>
+                    <span th:text="${msg}" style="color: red"></span>
                 </form>
             </div>
         </div>

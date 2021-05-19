@@ -22,4 +22,6 @@ public interface UserService {
     void updateImg(Integer id, String avatar);
     //查询email
     User queryEmail(String email);
+    //统计物品数量
+    int ItemsNum(String items,Integer id);
 }

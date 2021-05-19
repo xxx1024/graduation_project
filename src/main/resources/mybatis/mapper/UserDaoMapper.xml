@@ -6,7 +6,7 @@
     <!--注册-->
     <insert id="register" parameterType="User">
         insert into graduation_project.user(username, password, email, avatar)
-         values (#{username},#{password},#{email},#{avatar})
+         values (#{username},MD5(#{password}),#{email},#{avatar})
     </insert>
     <!--查询-->
     <select id="queryAll" resultType="User">
@@ -26,7 +26,7 @@
     </select>
     <!--修改密码-->
     <update id="update" parameterType="User">
-        update graduation_project.user set password=#{password}
+        update graduation_project.user set password=MD5(#{password})
         where id=#{id}
     </update>
     <!--修改name-->
@@ -43,5 +43,10 @@
     <select id="queryEmail" resultType="User">
         select * from graduation_project.user
         where email=#{email}
+    </select>
+    <!--统计物品数量-->
+    <select id="ItemsNum" resultType="int">
+        SELECT SUM(number) FROM register WHERE items =#{items}
+        and uid=#{id}
     </select>
 </mapper>

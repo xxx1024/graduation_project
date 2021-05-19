@@ -50,5 +50,10 @@ public class UserServiceImpl implements UserService{
         return userDao.queryEmail(email);
     }
 
+    @Override
+    public int ItemsNum(String items, Integer id) {
+        return userDao.ItemsNum(items, id);
+    }
+
 
 }

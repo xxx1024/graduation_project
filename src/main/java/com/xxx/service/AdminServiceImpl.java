@@ -105,4 +105,9 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.searchAdmin(username);
     }
 
+    @Override
+    public Admin queryByName(String username) {
+        return adminDao.queryByName(username);
+    }
+
 }

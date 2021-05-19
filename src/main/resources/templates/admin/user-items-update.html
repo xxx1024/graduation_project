@@ -64,8 +64,8 @@
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li class="active open"><a th:href="@{/admin-index}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
-            <li><a href="javascript:void(0);" class="menu-toggle">
+            <li><a th:href="@{/admin-index}"><img src="assets/images/zhuye.png" width="17"><span>主页</span></a></li>
+            <li class="active open"><a href="javascript:void(0);" class="menu-toggle">
                 <img src="assets/images/gerenzhongxin.png" width="17"><span>用户管理</span> </a>
                 <ul class="ml-menu">
                     <li><a th:href="@{/user-show}">用户列表</a></li>
@@ -136,8 +136,8 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>修改用户信息
-                    <small class="text-muted">修改用户信息</small>
+                <h2>登记表
+                    <small class="text-muted">请填写表单</small>
                 </h2>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
@@ -146,8 +146,8 @@
                 </button>
                 <ul class="breadcrumb float-md-right">
                     <li class="breadcrumb-item"><a th:href="@{/admin-index}"><i class="zmdi zmdi-home"></i>首页</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">捐助</a></li>
-                    <li class="breadcrumb-item active">登记表</li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">用户管理</a></li>
+                    <li class="breadcrumb-item active">修改登记表</li>
                 </ul>
             </div>
         </div>
@@ -156,40 +156,67 @@
         <div class="row clearfix">
             <div class="col-lg-12">
 
-                <form class="layui-form" th:action="@{/admin/user-update}">
+                <form class="layui-form" th:action="@{/admin/UserItems-update}">
                     <div class="layui-form-item">
                         <div class="card">
                             <div class="header">
-                                <h2><strong>用户名</strong><small>请输入用户名</small> </h2>
+                                <h2><strong>姓名</strong><small>请输入姓名</small> </h2>
                                 <ul class="header-dropdown m-r--5">
                                 </ul>
                             </div>
                             <div class="layui-input-block">
-                                <input th:value="${lists.username}" type="text" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
+                                <input th:value="${lists.name}" type="text" name="name" required lay-verify="required" autocomplete="off" class="layui-input">
                             </div><br>
                         </div>
                         <div class="card">
                             <div class="header">
-                                <h2><strong>密码</strong><small>请输入密码</small> </h2>
+                                <h2><strong>联系方式</strong><small>请输入手机号</small> </h2>
                                 <ul class="header-dropdown m-r--5">
                                 </ul>
                             </div>
                             <div class="layui-input-block">
-                                <input th:value="${lists.password}" type="tel" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                                <input th:value="${lists.phone}" type="tel" name="phone" required lay-verify="required" autocomplete="off" class="layui-input">
                             </div><br>
                         </div>
                         <div class="card">
                             <div class="header">
-                                <h2><strong>邮箱</strong><small>请输入邮箱</small> </h2>
+                                <h2><strong>物品</strong><small>请选择物品类型</small> </h2>
                                 <ul class="header-dropdown m-r--5">
                                 </ul>
                             </div>
-                            <div class="layui-input-block">
-                                <input th:value="${lists.email}" type="email" name="email" required lay-verify="required" autocomplete="off" class="layui-input">
-                            </div><br>
-                        </div>
-                    <input type="hidden" th:value="${lists.id}" name="id">
 
+                            <div class="layui-input-block">
+                                <select name="items" lay-verify="required">
+                                    <option name="items" th:text="${lists.items}"></option>
+                                    <option name="items" value="医用口罩">医用口罩</option>
+                                    <option name="items" value="医用防护服">医用防护服</option>
+                                    <option name="items" value="一次性医用手套">一次性医用手套</option>
+                                    <option name="items" value="其他">其他</option>
+                                </select>
+                            </div><br>
+                        </div>
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>数量</strong><small>请输入物品数量</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <div class="layui-input-block">
+                                <input th:value="${lists.number}" type="text" name="number" required lay-verify="required" autocomplete="off" class="layui-input">
+                            </div><br>
+                        </div>
+
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>快递单号</strong><small>请输入快递单号</small> </h2>
+                                <ul class="header-dropdown m-r--5">
+                                </ul>
+                            </div>
+                            <div class="layui-input-block">
+                                <input th:value="${lists.ems_number}" type="text" name="ems_number" required lay-verify="required" autocomplete="off" class="layui-input">
+                            </div><br>
+                        </div>
+                        <input type="hidden" name="id" th:value="${lists.id}">
                     </div>
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary btn-round">立即提交</button>

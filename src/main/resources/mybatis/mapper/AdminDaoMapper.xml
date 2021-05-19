@@ -21,7 +21,7 @@
     <!--修改用户-->
     <update id="updateUser" parameterType="User">
         update user set
-        username=#{username},password=#{password},email=#{email}
+        username=#{username},password=MD5(#{password}),email=#{email}
         where id=#{id}
     </update>
     <!--删除用户-->
@@ -43,7 +43,7 @@
     <update id="updateItems" parameterType="Register">
         update register set
         name=#{name},phone=#{phone},items=#{items},
-        ems_number=#{ems_number}
+        number=#{number},ems_number=#{ems_number}
         where id=#{id}
     </update>
     <!--删除表单-->
@@ -65,7 +65,7 @@
     <!--修改admin-->
     <update id="updateAdmin" parameterType="Admin">
         update admin set
-        username=#{username},password=#{password}
+        username=#{username},password=MD5(#{password})
         where id=#{id}
     </update>
     <!--删除admin-->
@@ -74,8 +74,12 @@
     </delete>
     <!--增加admin-->
     <insert id="add" parameterType="Admin">
-        insert into admin(username, password) values (#{username},#{password})
+        insert into admin(username, password) values (#{username},MD5(#{password}))
     </insert>
+    <!--查询admin是否存在-->
+    <select id="queryByName" resultType="Admin">
+        select * from admin where username=#{username}
+    </select>
     <!--统计物品数量-->
     <select id="ItemsNum" resultType="int">
         SELECT SUM(number) FROM register WHERE items =#{items}
