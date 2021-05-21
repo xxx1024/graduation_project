@@ -148,7 +148,7 @@
             <!--搜索框-->
             <form class="form-search" method="post" th:action="@{/searchItems}">
                 <div class="input-group">
-                    <input type="text" name="items" class="form-control" placeholder="输入物品名称查询">
+                    <input type="text" name="items" class="form-control" placeholder="输入物品名称或快递单号查询">
                     <span class="input-group-addon">
                          <i class="zmdi zmdi-search"></i>
                     </span>
@@ -169,6 +169,7 @@
                                 <th>快递单号</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
+                                <th>物资状态</th>
                                 <th>操作</th>
                             </tr></thead>
                             <tbody>
@@ -181,9 +182,15 @@
                                 <td th:text="${list.ems_number}"></td>
                                 <td th:text="${#dates.format(list.create_time,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${#dates.format(list.update_time,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:if="${list.status} == 0" style="color: orangered">运输中</td>
+                                <td th:if="${list.status} eq 1" style="color: blue">已收到</td>
                                 <td>
-                                    <a class="btn btn-primary btn-round" th:href="@{/admin-queryItemsId(id=${list.id})}">编辑</a>
+                                    <a th:if="${list.status} eq 1" hidden class="btn btn-primary btn-round" th:href="@{/admin-queryItemsId(id=${list.id})}">编辑</a>
+                                    <a th:if="${list.status} eq 0" class="btn btn-primary btn-round" th:href="@{/admin-queryItemsId(id=${list.id})}">编辑</a>
                                     <a class="btn btn-danger btn-round" th:href="@{/admin/items-delete(id=${list.id})}">删除</a>
+                                    <a th:if="${list.status} eq 1" hidden class="btn btn-dark btn-round" th:href="@{/admin/items-confirm(id=${list.id},status=${list.status})}">确认收到</a>
+                                    <a th:if="${list.status} eq 0" class="btn btn-dark btn-round" th:href="@{/admin/items-confirm(id=${list.id},status=${list.status})}">确认收到</a>
+
                                 </td>
                             </tr>
                             </tbody>

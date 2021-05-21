@@ -131,6 +131,12 @@ public class AdminController {
         adminService.updateItems(register);
         return "redirect:/admin-user-show";
     }
+    //捐助详情确认收货
+    @RequestMapping("/admin/user-items-confirm")
+    public String updateUserStatus(Register register){
+        adminService.updateStatus(register);
+        return "redirect:/admin-user-show";
+    }
 
     //根据id查询
     @RequestMapping("/admin-queryUserId")
@@ -204,7 +210,12 @@ public class AdminController {
         adminService.deleteItems(id);
         return "redirect:/admin-items-show";
     }
-
+    //确认收货
+    @RequestMapping("/admin/items-confirm")
+    public String updateStatus(Register register){
+        adminService.updateStatus(register);
+        return "redirect:/admin-items-show";
+    }
 
     @RequestMapping("/admin-show")
     public String qureyAllAdmin(HttpSession session,Model model,

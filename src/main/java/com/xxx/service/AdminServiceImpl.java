@@ -61,6 +61,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public void updateStatus(Register register) {
+        adminDao.updateStatus(register);
+    }
+
+    @Override
     public void add(Admin admin) {
         adminDao.add(admin);
     }

@@ -171,6 +171,7 @@
                                 <th>快递单号</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
+                                <th>物资状态</th>
                                 <th>操作</th>
                             </tr></thead>
                             <tbody>
@@ -182,8 +183,11 @@
                                 <td th:text="${list.ems_number}"></td>
                                 <td th:text="${#dates.format(list.create_time,'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${#dates.format(list.update_time,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:if="${list.status} == 0" style="color: orangered">运输中</td>
+                                <td th:if="${list.status} eq 1" style="color: blue">已收到</td>
                                 <td>
-                                    <a class="btn btn-primary btn-round" th:href="@{/query(id=${list.id})}">编辑</a>
+                                    <a th:if="${list.status} eq 1" hidden class="btn btn-primary btn-round" th:href="@{/query(id=${list.id})}">编辑</a>
+                                    <a th:if="${list.status} eq 0" class="btn btn-primary btn-round" th:href="@{/query(id=${list.id})}">编辑</a>
                                     <a class="btn btn-danger btn-round" th:href="@{/items/delete(id=${list.id})}">删除</a>
                                 </td>
                             </tr>

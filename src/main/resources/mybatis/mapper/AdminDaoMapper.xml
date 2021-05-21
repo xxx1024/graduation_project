@@ -50,6 +50,11 @@
     <delete id="deleteItems" parameterType="_int">
         delete from register where id=#{id}
     </delete>
+    <!--表单确认-->
+    <update id="updateStatus" parameterType="Register">
+        update register set status = 1
+        where id=#{id}
+    </update>
 
 
     <!--admin-->
@@ -94,6 +99,7 @@
     <select id="searchItems" resultType="Register">
         select * from register
         where register.items like concat('%',#{items},'%')
+        or ems_number like concat('%',#{items},'%')
     </select>
     <!--管理员搜索-->
     <select id="searchAdmin" resultType="Admin">

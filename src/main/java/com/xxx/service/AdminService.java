@@ -29,6 +29,8 @@ public interface AdminService {
     void updateItems(Register register);
     //删除表单
     void deleteItems(int id);
+    //确认表单
+    void updateStatus(Register register);
 
     //新增admin
     void add(Admin admin);

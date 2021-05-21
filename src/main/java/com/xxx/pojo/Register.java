@@ -20,5 +20,6 @@ public class Register {
     private String ems_number;
     private Date create_time;
     private Date update_time;
+    private int status;
     private int uid;
 }

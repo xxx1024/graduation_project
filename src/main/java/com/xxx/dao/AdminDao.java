@@ -32,6 +32,8 @@ public interface AdminDao {
     void updateItems(Register register);
     //删除表单
     void deleteItems(int id);
+    //确认表单
+    void updateStatus(Register register);
 
     //新增admin
     void add(Admin admin);
@@ -54,4 +56,5 @@ public interface AdminDao {
     List<Admin> searchAdmin(String username);
     //判断管理员用户名是否已经存在
     Admin queryByName(String username);
+
 }
