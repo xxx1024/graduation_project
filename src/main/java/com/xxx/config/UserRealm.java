@@ -11,16 +11,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRealm extends AuthorizingRealm {
-    @Override
-    public String getName() {
-        return "UserRealm";
-    }
 
     @Autowired
     UserService userService;
-    @Autowired
-    AdminService adminService;
-
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {

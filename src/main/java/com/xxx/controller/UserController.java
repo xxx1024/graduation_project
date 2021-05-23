@@ -58,7 +58,7 @@ public class UserController {
     //注册
     @RequestMapping("/user/register")
     public String register(String username,String email,
-                           String code,String password,
+                           String code,
                            User user, RedirectAttributes ra){
         User user1 = userService.queryAll(username);
         User user2 = userService.queryEmail(email);
@@ -134,7 +134,7 @@ public class UserController {
             ra1.addFlashAttribute("msg","密码错误"); //用户名不存在，还是返回Login页
             return "redirect:/login";
         }catch (UnknownAccountException e){
-            ra1.addFlashAttribute("msg","用户名错误");//密码不存在，还是返回Login页
+            ra1.addFlashAttribute("msg","账号不存在");//密码不存在，还是返回Login页
             return "redirect:/login";
         }
     }
